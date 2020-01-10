@@ -2,11 +2,13 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import PropsRoute from "./PropsRoute";
+import { Switch } from "react-router-dom";
 
 // importing react child components:
 import Header from "./Header";
 import Task from "./Task";
 import TaskList from "./TaskList";
+import TaskForm from "./TaskForm";
 
 class Editor extends React.Component {
   constructor(props) {
@@ -48,12 +50,14 @@ class Editor extends React.Component {
         <Header />
 
         <div className="grid">
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} activeId={Number(taskId)} />
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
           )}
-          {/* PropsRoute component is created to pass props to the child component */}
-          <PropsRoute path="/tasks/:id" component={Task} task={task} />
+          <Switch>
+            <PropsRoute path="/tasks/new" component={TaskForm} />
+            <PropsRoute path="/tasks/:id" component={Task} task={task} />
+          </Switch>
         </div>
       </div>
     );

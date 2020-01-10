@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 
 class TaskList extends React.Component {
   renderTasks() {
-    const { tasks } = this.props;
+    const { activeId, tasks } = this.props;
     tasks.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
     return tasks.map(task => (
       <li key={task.id}>
-        <Link to={`/tasks/${task.id}`}>
+        <Link
+          to={`/tasks/${task.id}`}
+          className={activeId === task.id ? "active" : ""}
+        >
           {task.deadline}
           {" - "}
           {task.title}
@@ -22,7 +25,10 @@ class TaskList extends React.Component {
     console.log("the TaskList component is now rendering...");
     return (
       <section className="taskList">
-        <h2>All Tasks</h2>
+        <h2>
+          All Tasks
+          <Link to="/tasks/new"> Add New Task</Link>
+        </h2>
         <ul>{this.renderTasks()}</ul>
       </section>
     );
