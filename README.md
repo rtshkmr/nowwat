@@ -47,6 +47,7 @@ Fri Jan 10 09:49:33 +08 2020
     didn't set the proper default props, a `undefined` vs `{}` empty object problem
 
 10. added some basic styling based of some tutorial, will look into it later. For now, the styling (App.css is in app/javascript/components/App.css) and is imported into App.js component
+    BUG: 
 
 
 # README

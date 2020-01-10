@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 // import styling:
-import "../../assets/stylesheets/App.css";
+import "./../../assets/stylesheets/application.css";
 
 // import Children components:
 import Editor from "./Editor";
