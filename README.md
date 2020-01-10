@@ -1,4 +1,4 @@
-# Progress
+# Progress for Task Model
 
 Fri Jan 10 09:49:33 +08 2020
 
@@ -68,7 +68,11 @@ Fri Jan 10 09:49:33 +08 2020
 
 13. callback function for the submission (making the API request)
   - callback is made in the context of the parent component, and passed in the form component
+  - submission works 
 
+
+14. Delete action"
+    - declare callback method in editor component and pass to the task component (child) in a similar way
 
 https://react-bootstrap.github.io/getting-started/introduction/
 
