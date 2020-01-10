@@ -8,7 +8,7 @@ import { Switch } from "react-router-dom";
 import Header from "./Header";
 import Task from "./Task";
 import TaskList from "./TaskList";
-import TaskForm from "./forms/TaskForm";
+import TaskForm from "./TaskForm";
 
 class Editor extends React.Component {
   constructor(props) {
