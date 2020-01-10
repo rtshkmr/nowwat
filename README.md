@@ -53,7 +53,9 @@ Fri Jan 10 09:49:33 +08 2020
   css styling stuff: https://www.w3schools.com/css/css_background.asp
 
 11. created the form component. Console logged to check if it renders locally. Form component is really complicated. 
-    HEROKU HAS ISSUES PRECOMPILING THE FORM WHAT THE HECK.
+    HEROKU HAS ISSUES PRECOMPILING THE FORM WHAT THE HECK. 
+    
+    ***possible solution is to run this***: `$ rails assets:precompile`
     I'm gonna try put the logic in the form first. 
 
     - protip: the submission function, let it render console logs on the object created first! then handle the API side of things
@@ -62,8 +64,11 @@ Fri Jan 10 09:49:33 +08 2020
 12. using Pickaday for datepicker.
     - add via yarn 
     - do the import from the form itself
-    - 
+    - ew but the thing is so disgusting
 
+
+
+https://react-bootstrap.github.io/getting-started/introduction/
 
 # README
 

@@ -8,6 +8,11 @@ import { isEmptyObject, validateTask, formatDate } from "./../helpers/helpers";
 import Pikaday from "pikaday";
 import "pikaday/css/pikaday.css";
 
+// import widget react date picker
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
