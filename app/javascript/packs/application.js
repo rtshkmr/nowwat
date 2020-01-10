@@ -2,11 +2,20 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
+import React from 'react';
+import { render } from 'react-dom';
+import App from '../components/App';
 
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+
+document.addEventListener('DOMContentLoaded', () => {
+    render(<App />, document.querySelector('#root'));
+    console.log("the App.js component should be rendered by now")
+  });
+  
 
 console.log("javascript pack: app/javascript/packs/application.js is now mounted / loaded ")
 
