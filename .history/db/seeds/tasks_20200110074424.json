@@ -1,0 +1,38 @@
+[
+    {
+      "title": "Symposium",
+      "body": "testbody",
+      "deadline": "2018-05-01",
+      "published": true
+    },
+    {
+      "title": "Colloquium",
+      "body": "testbody",
+      "deadline": "2018-04-01",
+      "published": true
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody",
+      "deadline": "2018-04-01",
+      "published": true
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody",
+      "deadline": "2017-05-01",
+      "published": true
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody",
+      "deadline": "2017-05-01",
+      "published": true
+    },
+    {
+      "title": "Colloquium",
+      "body": "testbody",
+      "deadline": "2017-05-01",
+      "published": true
+    }
+  ]

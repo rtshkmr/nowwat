@@ -1,0 +1,38 @@
+[
+    {
+      "title": "sampletask1seed",
+      "body": "testbody1",
+      "deadline": "2018-05-01",
+      "completed": false
+    },
+    {
+      "title": "Sample task 2",
+      "body": "testbody2",
+      "deadline": "2018-04-01",
+      "completed": false
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody3",
+      "deadline": "2018-04-01",
+      "completed": false
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody4",
+      "deadline": "2017-05-01",
+      "completed": false
+    },
+    {
+      "title": "Symposium",
+      "body": "testbody5",
+      "deadline": "2017-05-01",
+      "completed": false
+    },
+    {
+      "title": "Colloquium",
+      "body": "testbody6",
+      "deadline": "2017-05-01",
+      "completed": false
+    }
+  ]
