@@ -46,12 +46,15 @@ class Editor extends React.Component {
     return (
       <div>
         <Header />
-        <TaskList tasks={tasks} />
-        {console.log(
-          "TaskList component should be rendered with the tasks passed in"
-        )}
-        {/* PropsRoute component is created to pass props to the child component */}
-        <PropsRoute path="/tasks/:id" component={Task} task={task} />
+
+        <div className="grid">
+          <TaskList tasks={tasks} />
+          {console.log(
+            "TaskList component should be rendered with the tasks passed in"
+          )}
+          {/* PropsRoute component is created to pass props to the child component */}
+          <PropsRoute path="/tasks/:id" component={Task} task={task} />
+        </div>
       </div>
     );
   }

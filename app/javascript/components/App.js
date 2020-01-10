@@ -1,6 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
+
+// import styling:
+import './App.css';
+
+// import Children components:
 import Editor from "./Editor";
+
 
 const App = () => (
   <div>

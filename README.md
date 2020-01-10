@@ -16,7 +16,6 @@ Fri Jan 10 09:49:33 +08 2020
    - add external routes to ruby router, pointing to the site_controller's index action
 
 8. Created the <PropsRoute> component, to allow parent components to pass props to children components:
-
    ```javascript
    // app/javascript/components/PropsRoute.js
    import React from "react";
@@ -41,6 +40,14 @@ Fri Jan 10 09:49:33 +08 2020
 
    export default PropsRoute;
    ```
+
+
+9.  god bless I almost wanted to cry and the bug was a simple routing issue because of a prop passed in was wrong
+    along the way there were so many other bugs. Like using Proptypes is best practice so you don't get type errors, but i kind of 
+    didn't set the proper default props, a `undefined` vs `{}` empty object problem
+
+10. added some basic styling based of some tutorial, will look into it later. For now, the styling (App.css is in app/javascript/components/App.css) and is imported into App.js component
+
 
 # README
 

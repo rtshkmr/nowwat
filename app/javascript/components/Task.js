@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Task = ({ task }) => (
-  <div>
+  <div className="taskContainer">
     <h2>
       {task.deadline}
       {" - "}

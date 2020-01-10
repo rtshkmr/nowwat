@@ -21,7 +21,7 @@ class TaskList extends React.Component {
   render() {
     console.log("the TaskList component is now rendering...");
     return (
-      <section>
+      <section className="taskList">
         <h2>All Tasks</h2>
         <ul>{this.renderTasks()}</ul>
       </section>
