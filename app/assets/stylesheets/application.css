@@ -17,7 +17,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Monoton&display=swap');
 
 /* @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,300,400italic");
-@import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700"); */
+ @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700"); */
 
 
 /* below is a custom reset */
@@ -65,17 +65,17 @@ body {
 
 header {
     background: #fd0303;
-    height: 60px;
+    height: 100px;
 }
 
 header h1,
 header h1 a {
     display: inline-block;
     font-family: 'Monoton', cursive;
-    font-size: 28px;
+    font-size: 60px;
     font-weight: 500;
     color: rgb(22, 1, 1);
-    padding: 14px 5%;
+    padding: 30px 5%;
     text-decoration: none;
 }
 
