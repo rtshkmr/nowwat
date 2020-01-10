@@ -35,7 +35,7 @@ class TaskForm extends React.Component {
       onSelect: date => {
         const formattedDate = formatDate(date);
         this.dateInput.current.value = formattedDate;
-        this.updateEvent("deadline", formattedDate);
+        this.updateTask("deadline", formattedDate);
       }
     });
   }
@@ -47,9 +47,12 @@ class TaskForm extends React.Component {
     if (!isEmptyObject(errors)) {
       this.setState({ errors });
     } else {
-      console.log(task);
+      const { onSubmit } = this.props;
+      onSubmit(task);
+      console.log(
+        " form has been been submitted, this was the object passed: ${ task }"
+      );
     }
-    console.log("task form has been submitted");
   }
 
   updateTask(key, value) {
@@ -155,7 +158,8 @@ class TaskForm extends React.Component {
 
 // type checking and defaults:
 TaskForm.propTypes = {
-  task: PropTypes.shape()
+  task: PropTypes.shape(),
+  onSubmit: PropTypes.func.isRequired
 };
 
 TaskForm.defaultProps = {

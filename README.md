@@ -66,6 +66,8 @@ Fri Jan 10 09:49:33 +08 2020
     - do the import from the form itself
     - ew but the thing is so disgusting
 
+13. callback function for the submission (making the API request)
+  - callback is made in the context of the parent component, and passed in the form component
 
 
 https://react-bootstrap.github.io/getting-started/introduction/

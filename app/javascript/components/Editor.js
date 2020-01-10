@@ -16,6 +16,10 @@ class Editor extends React.Component {
     this.state = {
       tasks: null
     };
+
+    //   bind class method:
+    this.addTask = this.addTask.bind(this);
+
     console.log("editor component has been contructed");
   }
 
@@ -32,6 +36,24 @@ class Editor extends React.Component {
     console.log(
       "API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
     );
+  }
+
+  addTask(newTask) {
+    axios
+      .post("/api/tasks.json", newTask)
+      .then(response => {
+        alert("Task Added!");
+        const savedTask = response.data;
+        this.setState(prevState => ({
+          tasks: [...prevState.tasks, savedTask]
+        }));
+        const { history } = this.props;
+        //   redirect to the created task component:
+        history.push(`/tasks/${savedTask.id}`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -55,7 +77,14 @@ class Editor extends React.Component {
             "TaskList component should be rendered with the tasks passed in"
           )}
           <Switch>
-            <PropsRoute path="/tasks/new" component={TaskForm} />
+            {/* -------------new task form ----------------------- */}
+            <PropsRoute
+              path="/tasks/new"
+              component={TaskForm}
+              onSubmit={this.addTask}
+              // addTask callback function is passed to TaskForm as a callback function prop
+            />
+            {/* -------------display task ----------------------- */}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />
           </Switch>
         </div>
@@ -65,7 +94,8 @@ class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  match: PropTypes.shape()
+  match: PropTypes.shape(),
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired
 };
 
 Editor.defaultProps = {
