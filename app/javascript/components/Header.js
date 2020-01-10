@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const Header = () => (
   <header>
     <h1>TODOs</h1>
-    </header>
+  </header>
 );
-console.log("the header component should be rendered by now")
-
+// console.log("the header component should be rendered by now");
 
 export default Header;
