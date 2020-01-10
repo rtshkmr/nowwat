@@ -1,12 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Task = ({ task }) => (
+const Task = ({ task, onDelete }) => (
   <div className="taskContainer">
     <h2>
       {task.deadline}
       {" - "}
       {task.title}
+      <button
+        className="delete"
+        type="button"
+        onClick={() => onDelete(task.id)}
+      >
+        Delete Task
+      </button>
     </h2>
     <ul>
       <li>
@@ -30,11 +37,12 @@ const Task = ({ task }) => (
 );
 
 Task.propTypes = {
-  task: PropTypes.shape()
+  task: PropTypes.shape(),
+  onDelete: PropTypes.func.isRequired
 };
 
 Task.defaultProps = {
-    task: {}, 
+  task: {}
 };
 
 export default Task;

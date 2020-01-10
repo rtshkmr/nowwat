@@ -73,6 +73,8 @@ Fri Jan 10 09:49:33 +08 2020
 
 14. Delete action"
     - declare callback method in editor component and pass to the task component (child) in a similar way
+    - settle axios call and subsequent redirects
+    - 
 
 https://react-bootstrap.github.io/getting-started/introduction/
 

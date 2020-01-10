@@ -19,6 +19,7 @@ class Editor extends React.Component {
 
     //   bind class method:
     this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
 
     console.log("editor component has been contructed");
   }
@@ -55,6 +56,31 @@ class Editor extends React.Component {
         console.log(error);
       });
   }
+  deleteTask(taskId) {
+    const sure = window.confirm("Are you sure?");
+    if (sure) {
+      axios
+        .delete(`/api/tasks/${taskId}.json`)
+        .then(response => {
+          if (response.status === 204) {
+            alert("Task deleted");
+            const { history } = this.props;
+
+            //   redirect to the root page
+            history.push("/tasks");
+
+            const { tasks } = this.state;
+
+            //   remove the deleted element from state:
+            this.setState({ tasks: tasks.filter(task => task.id !== taskId) });
+            console.log("task has been sucessfully deleted...");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
 
   render() {
     const { tasks } = this.state;
@@ -70,7 +96,11 @@ class Editor extends React.Component {
     return (
       <div>
         <Header />
-
+        {/* Keep routes in this order:
+1. new
+2.delete
+3.display
+*/}
         <div className="grid">
           <TaskList tasks={tasks} activeId={Number(taskId)} />
           {console.log(
@@ -83,6 +113,13 @@ class Editor extends React.Component {
               component={TaskForm}
               onSubmit={this.addTask}
               // addTask callback function is passed to TaskForm as a callback function prop
+            />
+            {/* -------------Delete task callback route ------------- */}
+            <PropsRoute
+              path="/tasks/:id"
+              component={Task}
+              task={task}
+              onDelete={this.deleteTask}
             />
             {/* -------------display task ----------------------- */}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />
