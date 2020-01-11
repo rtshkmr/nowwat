@@ -17,12 +17,15 @@ class Editor extends React.Component {
       tasks: null
     };
 
-    //   bind class method:
+    //   bind class methods: ADD/DELETE/UPDATE
     this.addTask = this.addTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
 
     console.log("editor component has been contructed");
   }
+
+  // =========================  API FETCHING UPON MOUNT ================================
 
   componentDidMount() {
     console.log(
@@ -38,6 +41,8 @@ class Editor extends React.Component {
       "API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
     );
   }
+
+  // =========================  CREATE/NEW TASK METHOD ================================
 
   addTask(newTask) {
     axios
@@ -56,6 +61,9 @@ class Editor extends React.Component {
         console.log(error);
       });
   }
+
+  // =========================  DELETE TASK METHOD ================================
+
   deleteTask(taskId) {
     const sure = window.confirm("Are you sure?");
     if (sure) {
@@ -82,6 +90,25 @@ class Editor extends React.Component {
     }
   }
 
+  // =========================  UPDATE/EDIT TASK METHOD ================================
+
+  updateTask(updatedTask) {
+    axios
+      .put(`/api/tasks/${updatedTask.id}.json`, updatedTask)
+      .then(() => {
+        alert("Task update successfully");
+        const { tasks } = this.state;
+        const idx = tasks.findIndex(task => task.id === updatedTask.id);
+        tasks[idx] = updatedTask;
+        const { history } = this.props;
+        history.push(`/tasks/${updatedTask.id}`);
+        this.setState({ tasks });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   render() {
     const { tasks } = this.state;
     //   null check just in case
@@ -98,14 +125,18 @@ class Editor extends React.Component {
         <Header />
         {/* Keep routes in this order:
 1. new
-2.delete
-3.display
+2. edit
+3.delete
+4.display
 */}
         <div className="grid">
           <TaskList tasks={tasks} activeId={Number(taskId)} />
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
           )}
+
+          {/*  ===========================   ROUTING TABLE BELOW  ============================= */}
+
           <Switch>
             {/* -------------new task form ----------------------- */}
             <PropsRoute
@@ -114,13 +145,31 @@ class Editor extends React.Component {
               onSubmit={this.addTask}
               // addTask callback function is passed to TaskForm as a callback function prop
             />
-            {/* -------------Delete task callback route ------------- */}
-            <PropsRoute
-              path="/tasks/:id"
-              component={Task}
-              task={task}
-              onDelete={this.deleteTask}
-            />
+
+            {/* -------------edit task route ----------------------- */}
+            <Switch>
+              <PropsRoute
+                path="/tasks/new"
+                component={TaskForm}
+                onSubmit={this.addTask}
+              />
+              <PropsRoute
+                exact
+                path="/tasks/:id/edit"
+                component={TaskForm}
+                task={task}
+                onSubmit={this.updateTask}
+              />
+
+              {/* -------------Delete task callback route ------------- */}
+              <PropsRoute
+                path="/tasks/:id"
+                component={Task}
+                task={task}
+                onDelete={this.deleteTask}
+              />
+            </Switch>
+
             {/* -------------display task ----------------------- */}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />
           </Switch>

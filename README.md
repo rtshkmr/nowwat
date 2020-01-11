@@ -74,7 +74,10 @@ Fri Jan 10 09:49:33 +08 2020
 14. Delete action"
     - declare callback method in editor component and pass to the task component (child) in a similar way
     - settle axios call and subsequent redirects
-    - 
+
+15. Update Action
+  - the routing order is v impt, spent ages trying to fix bug, ended up just putting it in order. See routing "table" in Editor.js
+  - there has to be a switch around new/update/delete
 
 https://react-bootstrap.github.io/getting-started/introduction/
 

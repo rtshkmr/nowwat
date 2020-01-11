@@ -16,10 +16,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Monoton&display=swap');
 
-/* @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,300,400italic");
- @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700"); */
-
-
 /* below is a custom reset */
 
 body,
@@ -121,20 +117,20 @@ a.active {
 
 .taskList a {
     display: block;
-    color: rgb(26, 3, 3);
+    color: rgb(230, 207, 207);
     text-decoration: none;
-    border-bottom: 1.5px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
     padding: 8px 6px 10px;
     outline: 0;
 }
 
 .taskList h2>a {
-    color: #010814;
-    font-size: 15px;
+    color: #f5f5f5;
+    font-size: px;
     float: right;
-    font-weight: normal;
+    font-weight: bold;
     border-bottom: none;
-    padding: 0px;
+    padding: 1px;
 }
 
 .taskForm {
@@ -202,7 +198,7 @@ button.delete {
     padding: 0 !important;
     margin-left: 10px;
     cursor: pointer;
-    color: #236fff;
+    color: #850108;
     font-size: 15px;
     font-weight: normal;
     margin: 3px 0 0 0;
@@ -214,9 +210,9 @@ button.delete:hover {
 }
 
 h2 a {
-    color: #236fff;
-    font-size: 15px;
-    font-weight: normal;
+    color: #700303;
+    font-size: 12px;
+    font-weight: bold;
     margin: 3px 12px 0 12px;
     text-decoration: none;
 }
@@ -226,7 +222,7 @@ h2 a:hover {
 }
 
 .form-actions a {
-    color: #236fff;
+    color: #660101;
     font-size: 15px;
     margin: 3px 12px 0 12px;
     text-decoration: none;

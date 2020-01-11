@@ -29,15 +29,21 @@ class TaskForm extends React.Component {
     this.dateInput = React.createRef();
   }
 
+  // ==============================    HOOKS    ===============================
   componentDidMount() {
     new Pikaday({
       field: this.dateInput.current,
+      toString: date => formatDate(date),
       onSelect: date => {
         const formattedDate = formatDate(date);
         this.dateInput.current.value = formattedDate;
         this.updateTask("deadline", formattedDate);
       }
     });
+  }
+
+  componentWillReceiveProps({ task }) {
+    this.setState({ task });
   }
 
   handleSubmit(e) {
@@ -92,6 +98,8 @@ class TaskForm extends React.Component {
   }
 
   render() {
+    const { task } = this.state; // create state to fill in existing fields
+
     return (
       <div>
         <h2>New Task</h2>
@@ -106,6 +114,7 @@ class TaskForm extends React.Component {
                 id="title"
                 name="title"
                 onChange={this.handleInputChange}
+                value={task.title}
               />
             </label>
           </div>
@@ -118,6 +127,7 @@ class TaskForm extends React.Component {
                 id="body"
                 name="body"
                 onChange={this.handleInputChange}
+                value={task.body}
               />
             </label>
           </div>
@@ -132,6 +142,8 @@ class TaskForm extends React.Component {
                 // CREATING A REP ON THE INPUT SO WE CAN REFERENCE IT ELSEWHERE IN THE CODE
                 ref={this.dateInput}
                 autoComplete="off"
+                value={task.deadline}
+                onChange={this.handleInputChange}
               />
             </label>
           </div>
@@ -144,6 +156,7 @@ class TaskForm extends React.Component {
                 id="completed"
                 name="completed"
                 onChange={this.handleInputChange}
+                value={task.completed}
               />
             </label>
           </div>

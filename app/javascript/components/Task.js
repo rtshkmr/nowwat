@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom'; // to pass existing props to task form when editing
+
 
 const Task = ({ task, onDelete }) => (
   <div className="taskContainer">
@@ -7,6 +9,7 @@ const Task = ({ task, onDelete }) => (
       {task.deadline}
       {" - "}
       {task.title}
+      <Link to={`/tasks/${task.id}/edit`}>Edit Task</Link>
       <button
         className="delete"
         type="button"
