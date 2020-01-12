@@ -13,9 +13,6 @@ export const validateTask = task => {
     errors.body = "You must enter a body for your task";
   }
 
-  if (task.deadline === "") {
-    errors.deadline = "You must enter a deadline for your task";
-  }
   if (!isValidDate(task.deadline)) {
     errors.deadline = 'You must enter a valid date for deadline';
   }
