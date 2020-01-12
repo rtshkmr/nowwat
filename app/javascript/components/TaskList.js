@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import { formatDate } from "./../helpers/helpers";
+
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
@@ -17,18 +19,19 @@ class TaskList extends React.Component {
   updateSearchTerm() {
     this.setState({ searchTerm: this.searchInput.current.value });
   }
-  
+
   matchSearchTerm(obj) {
-    const {
-      id, published, created_at, updated_at, ...rest
-    } = obj;
+    const { id, published, created_at, updated_at, ...rest } = obj;
     const { searchTerm } = this.state;
-  
+
     return Object.values(rest).some(
-      value => value.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1,
+      value =>
+        value
+          .toString()
+          .toLowerCase()
+          .indexOf(searchTerm.toLowerCase()) > -1
     );
   }
-
 
   // filters based on search input field
   renderTasks() {
