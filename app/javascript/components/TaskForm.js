@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 // import helper functions:
 import { isEmptyObject, validateTask, formatDate } from "./../helpers/helpers";
@@ -87,54 +88,60 @@ class TaskForm extends React.Component {
 
     return (
       <div className="errors">
-        <h3>The following errors prohibited the task from being saved:</h3>
+        <h3> The following errors prohibited the task from being saved: </h3>{" "}
         <ul>
+          {" "}
           {Object.values(errors).map(error => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
+            <li key={error}> {error} </li>
+          ))}{" "}
+        </ul>{" "}
       </div>
     );
   }
 
   render() {
+    // capture relevant consts:
     const { task } = this.state; // create state to fill in existing fields
+    const cancelURL = task.id ? `/tasks/${task.id}` : "/tasks";
+    const title = task.id ? `${task.deadline} - ${task.title}` : "New Task"; // refers to the view's title thing that we going to put
 
     return (
       <div>
-        <h2>New Task</h2>
-        {this.renderErrors()}
+        <h2> {title} </h2>
+        {this.renderErrors()}{" "}
         <form className="taskForm" onSubmit={this.handleSubmit}>
-          {/* ============  TITLE  ======================= */}
+          {" "}
+          {/* ============  TITLE  ======================= */}{" "}
           <div>
             <label htmlFor="title">
-              <strong>Title:</strong>
+              <strong> Title: </strong>{" "}
               <input
                 type="text"
                 id="title"
                 name="title"
                 onChange={this.handleInputChange}
                 value={task.title}
-              />
-            </label>
-          </div>
-          {/* =============== BODY ===================== */}
+              />{" "}
+            </label>{" "}
+          </div>{" "}
+          {/* =============== BODY ===================== */}{" "}
           <div>
             <label htmlFor="body">
-              <strong>Body:</strong>
+              <strong> Body: </strong>{" "}
               <input
                 type="text"
                 id="body"
                 name="body"
                 onChange={this.handleInputChange}
                 value={task.body}
-              />
-            </label>
-          </div>
+              />{" "}
+            </label>{" "}
+          </div>{" "}
           <div>
-            {/* ========== DEADLINE ===================== */}
+            {" "}
+            {/* ========== DEADLINE ===================== */}{" "}
             <label htmlFor="deadline">
-              <strong>Deadline:</strong>
+              <strong> Deadline: </strong>{" "}
               <input
                 type="text"
                 id="deadline"
@@ -144,26 +151,28 @@ class TaskForm extends React.Component {
                 autoComplete="off"
                 value={task.deadline}
                 onChange={this.handleInputChange}
-              />
-            </label>
-          </div>
-          {/* ============= COMPLETED STATUS============== */}
+              />{" "}
+            </label>{" "}
+          </div>{" "}
+          {/* ============= COMPLETED STATUS============== */}{" "}
           <div>
             <label htmlFor="completed">
-              <strong>Completed?:</strong>
+              <strong> Completed ? : </strong>{" "}
               <input
                 type="checkbox"
                 id="completed"
                 name="completed"
                 onChange={this.handleInputChange}
                 value={task.completed}
-              />
-            </label>
-          </div>
+              />{" "}
+            </label>{" "}
+          </div>{" "}
+          {/* ============= FORM ACTIONS ============== */}{" "}
           <div className="form-actions">
-            <button type="submit">Save Task</button>
-          </div>
-        </form>
+            <button type="submit"> Save Task </button>{" "}
+            <Link to={cancelURL}>Cancel</Link>
+          </div>{" "}
+        </form>{" "}
       </div>
     );
   }

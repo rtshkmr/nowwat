@@ -1,3 +1,5 @@
+const isValidDate = dateObj => !Number.isNaN(Date.parse(dateObj));
+
 export const isEmptyObject = obj => Object.keys(obj).length === 0;
 
 export const validateTask = task => {
@@ -13,6 +15,9 @@ export const validateTask = task => {
 
   if (task.deadline === "") {
     errors.deadline = "You must enter a deadline for your task";
+  }
+  if (!isValidDate(task.deadline)) {
+    errors.deadline = 'You must enter a valid date for deadline';
   }
   console.log(task);
   return errors;
