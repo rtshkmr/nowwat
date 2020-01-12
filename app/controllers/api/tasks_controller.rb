@@ -4,11 +4,11 @@ class Api::TasksController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Task.order(deadline: :DESC)
+    respond_with Task.order(deadline: :DESC), include: :tags
   end
 
   def show
-    respond_with Task.find(params[:id])
+    respond_with Task.find(params[:id]), include: :tags
   end
 
   def create
@@ -33,7 +33,8 @@ class Api::TasksController < ApplicationController
       :title,
       :body,
       :deadline,
-      :completed
+      :completed,
+      :tag_list,
     )
   end
 end

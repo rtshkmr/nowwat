@@ -118,7 +118,7 @@ https://react-bootstrap.github.io/getting-started/introduction/
         id, published, created_at, updated_at, ...rest
       } = obj;
       const { searchTerm } = this.state;
-    
+
       return Object.values(rest).some(
         value => value.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) > -1,
       );
@@ -135,8 +135,6 @@ https://react-bootstrap.github.io/getting-started/introduction/
         .filter(el => this.matchSearchTerm(el))
         .sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
-      // tasks.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
-
       return filteredTasks.map(task => (
         <li key={task.id}>
           <Link
@@ -152,6 +150,154 @@ https://react-bootstrap.github.io/getting-started/introduction/
     }
 
   ```
+
+# Progress for Tag Model
+
+Sun Jan 12 16:59:56 +08 2020
+
+1. generate Tags and Tagging models first, then settle the controllers under the API namespace. Okay nice settled the relationships in the model's ruby files.
+   using rails console, db seems to be properly set up
+2. model methods:
+   - tag_list: an attribute/method that represents the task's related tags
+3. now have to namespace their controllers and render json...
+
+```json
+// http://localhost:3000/api/tasks.json
+
+[
+  {
+    "id": 1,
+    "title": "testing db",
+    "body": "asdf",
+    "deadline": "2020-01-12",
+    "completed": true,
+    "created_at": "2020-01-12T08:10:43.820Z",
+    "updated_at": "2020-01-12T08:10:43.820Z",
+    "tags": [
+      {
+        "id": 2,
+        "name": "tagg1test",
+        "created_at": "2020-01-12T08:27:43.695Z",
+        "updated_at": "2020-01-12T08:27:43.695Z"
+      },
+      {
+        "id": 3,
+        "name": "tagg22222test",
+        "created_at": "2020-01-12T08:27:51.832Z",
+        "updated_at": "2020-01-12T08:27:51.832Z"
+      },
+      {
+        "id": 4,
+        "name": "tagg3333333test",
+        "created_at": "2020-01-12T08:27:57.447Z",
+        "updated_at": "2020-01-12T08:27:57.447Z"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "why the stylesheet got issues in heroku deployment?? ",
+    "body": "aasdfa",
+    "deadline": "2020-01-12",
+    "completed": false,
+    "created_at": "2020-01-12T08:44:05.387Z",
+    "updated_at": "2020-01-12T08:44:05.387Z",
+    "tags": []
+  }
+]
+```
+
+```json
+// http://localhost:3000/api/tasks/1.json
+{
+  "id": 1,
+  "title": "testing db",
+  "body": "asdf",
+  "deadline": "2020-01-12",
+  "completed": true,
+  "created_at": "2020-01-12T08:10:43.820Z",
+  "updated_at": "2020-01-12T08:10:43.820Z",
+  "tags": [
+    {
+      "id": 2,
+      "name": "tagg1test",
+      "created_at": "2020-01-12T08:27:43.695Z",
+      "updated_at": "2020-01-12T08:27:43.695Z"
+    },
+    {
+      "id": 3,
+      "name": "tagg22222test",
+      "created_at": "2020-01-12T08:27:51.832Z",
+      "updated_at": "2020-01-12T08:27:51.832Z"
+    },
+    {
+      "id": 4,
+      "name": "tagg3333333test",
+      "created_at": "2020-01-12T08:27:57.447Z",
+      "updated_at": "2020-01-12T08:27:57.447Z"
+    }
+  ]
+}
+```
+
+```json
+// http://localhost:3000/api/tags.json
+[
+  {
+    "id": 4,
+    "name": "tagg3333333test",
+    "created_at": "2020-01-12T08:27:57.447Z",
+    "updated_at": "2020-01-12T08:27:57.447Z",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "testing db",
+        "body": "asdf",
+        "deadline": "2020-01-12",
+        "completed": true,
+        "created_at": "2020-01-12T08:10:43.820Z",
+        "updated_at": "2020-01-12T08:10:43.820Z"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "tagg22222test",
+    "created_at": "2020-01-12T08:27:51.832Z",
+    "updated_at": "2020-01-12T08:27:51.832Z",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "testing db",
+        "body": "asdf",
+        "deadline": "2020-01-12",
+        "completed": true,
+        "created_at": "2020-01-12T08:10:43.820Z",
+        "updated_at": "2020-01-12T08:10:43.820Z"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "tagg1test",
+    "created_at": "2020-01-12T08:27:43.695Z",
+    "updated_at": "2020-01-12T08:27:43.695Z",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "testing db",
+        "body": "asdf",
+        "deadline": "2020-01-12",
+        "completed": true,
+        "created_at": "2020-01-12T08:10:43.820Z",
+        "updated_at": "2020-01-12T08:10:43.820Z"
+      }
+    ]
+  }
+]
+```
+
+1. hmm can't generate the nested attribute though :( probably have to look into something like this:
 
 # README
 
