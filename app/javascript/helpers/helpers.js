@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom"; // to pass existing props to task form when editing
 
 const isValidDate = dateObj => !Number.isNaN(Date.parse(dateObj));
 
@@ -17,7 +17,7 @@ export const validateTask = task => {
   }
 
   if (!isValidDate(task.deadline)) {
-    errors.deadline = 'You must enter a valid date for deadline';
+    errors.deadline = "You must enter a valid date for deadline";
   }
   console.log(task);
   return errors;
@@ -32,14 +32,42 @@ export const formatDate = d => {
   // return `${DD}/${MM}/${YYYY}`;
 };
 
+// export function tag_list(task) {
+//   let result = "";
+//   task.tags.forEach(element => {
+//     <div>
+//       <Link to={`/tags/${element.id}`}> {element.name}</Link>
+//     </div>;
+//   });
+//   return (
+//     <div>
+//       {/* <Link to={`/tags/${element.id}`}> { element.name }</Link> */}
+
+//       {/* {result} */}
+//     </div>
+//   );
+// }
 
 export function tag_list(task) {
-  let result = "";
-  task.tags.map(element => {
-    result += " #" + element.name;
+  // let result = "";
+  // task.tags.forEach(element => {
+  //   <div>
+  //     <Link to={`/tags/${element.id}`}> {element.name}</Link>
+  //   </div>;
+  // });
+  // return (
+  //   <div>
+  //     {/* <Link to={`/tags/${element.id}`}> { element.name }</Link> */}
+
+  //     {/* {result} */}
+  //   </div>
+  // );
+
+  return task.tags.map(tag => {
+    <li key={tag.id}>
+      <Link to={`/tags/${tag.id}`} className="displayedTag">
+        {tag.name}
+      </Link>
+    </li>;
   });
-  return <div>
-    {/* <Link to={`/tags/${element.id}`}> { element.name }</Link> */}
-    
-    {result}</div>;
 }

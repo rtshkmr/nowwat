@@ -2,16 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { formatDate } from "./../helpers/helpers";
-
-class TaskList extends React.Component {
+class TagList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchTerm: ""
     };
 
-    //  bind class methods for TaskList component:
+    //  bind class methods for TagList component:
     this.searchInput = React.createRef();
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
   }
@@ -34,58 +32,56 @@ class TaskList extends React.Component {
   }
 
   // filters based on search input field
-  renderTasks() {
-    const { activeId, tasks } = this.props;
+  renderTags() {
+    const { activeId, tags } = this.props;
 
-    const filteredTasks = tasks
+    const filteredTags = tags
       .filter(el => this.matchSearchTerm(el))
       .sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
-    return filteredTasks.map(task => (
-      <li key={task.id}>
+
+    return filteredTags.map(tag => (
+      <li key={tag.id}>
         <Link
-          to={`/tasks/${task.id}`}
-          className={activeId === task.id ? "active" : ""}
+          to={`/tags/${tag.id}`}
+          className={activeId === tag.id ? "active" : ""}
         >
-          {task.deadline} {" - "} {task.title}{" "}
+          {tag.name}
         </Link>{" "}
       </li>
     ));
   }
 
   render() {
-    console.log("the TaskList component is now rendering...");
-    console.log("from the TaskList Props: " + this.props.tasks.tags);
+    console.log("the TagList component is now rendering...");
+    console.log("from the TagList Props: " + this.props.tags);
 
     return (
-      <section className="taskList">
+      <section className="TagList">
         <h2>
-          All Tasks
-          <p>
-            <Link to="/tasks/new"> Add New Task </Link>{" "}
-          </p>
+          All Tags 
         </h2>
         {/*-------------------- Search Input ------------------ */}
         <input
           className="search"
-          placeholder="Search Tasks"
+          placeholder="Search Tags"
           type="text"
           // ref to reference it within the same component:
           ref={this.searchInput}
           onKeyUp={this.updateSearchTerm}
         />
-        <ul> {this.renderTasks()} </ul>{" "}
+        <ul> {this.renderTags()} </ul>{" "}
       </section>
     );
   }
 }
 
-TaskList.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object)
+TagList.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.object)
 };
 
-TaskList.defaultProps = {
-  tasks: []
+TagList.defaultProps = {
+  tags: []
 };
 
-export default TaskList;
+export default TagList;

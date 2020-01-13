@@ -237,3 +237,48 @@ input.search {
     margin: 15px 2px;
     padding: 4px 0 6px 6px;
 }
+
+.tagList {
+    background: #a10000;
+    padding: 16px;
+}
+
+.tagList h2 {
+    font-family: 'IBM Plex Sans';
+    font-size: 20px;
+    padding: 8px 6px 10px;
+}
+
+.tagContainer {
+    /* background: #e40000; */
+    font-size: 15px;
+    line-height: 35px;
+}
+
+.tagContainer h2 {
+    margin-bottom: 10px;
+    /* font-family: 'Limelight'; */
+}
+
+.tagList li:hover,
+a.active {
+    background: #f7050560;
+}
+
+.tagList a {
+    display: block;
+    color: rgb(230, 207, 207);
+    text-decoration: none;
+    border-bottom: 1px solid #dddddd;
+    padding: 8px 6px 10px;
+    outline: 0;
+}
+
+.tagList h2>a {
+    color: #f5f5f5;
+    font-size: px;
+    float: right;
+    font-weight: bold;
+    border-bottom: none;
+    padding: 1px;
+}
