@@ -1,3 +1,6 @@
+import React from "react";
+
+
 const isValidDate = dateObj => !Number.isNaN(Date.parse(dateObj));
 
 export const isEmptyObject = obj => Object.keys(obj).length === 0;
@@ -28,3 +31,15 @@ export const formatDate = d => {
   return `${YYYY}-${MM}-${DD}`;
   // return `${DD}/${MM}/${YYYY}`;
 };
+
+
+export function tag_list(task) {
+  let result = "";
+  task.tags.map(element => {
+    result += " #" + element.name;
+  });
+  return <div>
+    {/* <Link to={`/tags/${element.id}`}> { element.name }</Link> */}
+    
+    {result}</div>;
+}

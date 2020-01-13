@@ -41,7 +41,6 @@ class TaskList extends React.Component {
       .filter(el => this.matchSearchTerm(el))
       .sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
-    // tasks.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
     return filteredTasks.map(task => (
       <li key={task.id}>
@@ -49,25 +48,22 @@ class TaskList extends React.Component {
           to={`/tasks/${task.id}`}
           className={activeId === task.id ? "active" : ""}
         >
-          {task.deadline}
-          {" - "}
-          {task.title}
-        </Link>
+          {task.deadline} {" - "} {task.title}{" "}
+        </Link>{" "}
       </li>
     ));
   }
 
   render() {
     console.log("the TaskList component is now rendering...");
+    console.log("from the TaskList Props: " + this.props.tasks.tags);
+
     return (
       <section className="taskList">
         <h2>
-          All Tasks
-          <Link to="/tasks/new"> Add New Task</Link>
+          All Tasks <Link to="/tasks/new"> Add New Task </Link>{" "}
         </h2>
-
         {/*-------------------- Search Input ------------------ */}
-
         <input
           className="search"
           placeholder="Search Tasks"
@@ -76,8 +72,7 @@ class TaskList extends React.Component {
           ref={this.searchInput}
           onKeyUp={this.updateSearchTerm}
         />
-
-        <ul>{this.renderTasks()}</ul>
+        <ul> {this.renderTasks()} </ul>{" "}
       </section>
     );
   }

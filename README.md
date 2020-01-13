@@ -296,7 +296,7 @@ Sun Jan 12 16:59:56 +08 2020
   }
 ]
 ```
-
+4. managed to extract tags from API call and put into state. Now have to make a view component for tag to view all the associated
 
 # README
 

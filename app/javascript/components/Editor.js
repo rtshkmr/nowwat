@@ -33,13 +33,19 @@ class Editor extends React.Component {
     );
     axios
       .get("/api/tasks.json")
-      .then(response => this.setState({ tasks: response.data }))
+      .then(response => {
+        this.setState({ tasks: response.data });
+        console.log("axios response: ", response.data);
+        console.log("current state in Editor.js: ", this.state);
+      })
       .catch(error => {
         console.log(error);
       });
+    console.log("from within the axios call: ",this.state.tasks);
     console.log(
       "API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
     );
+    console.log("this.state.tasks:", this.state.tasks);
   }
 
   // =========================  CREATE/NEW TASK METHOD ================================
@@ -117,42 +123,40 @@ class Editor extends React.Component {
     const { match } = this.props;
     const taskId = match.params.id;
     const task = tasks.find(e => e.id === Number(taskId));
-
+    console.log("this.state.tasks from editor.js:" + this.state.tasks);
     console.log("now rendering the editor component");
 
     return (
       <div>
-        <Header />
+        <Header />{" "}
         {/* Keep routes in this order:
-1. new
-2. edit
-3.delete
-4.display
-*/}
+                1. new
+                2. edit
+                3.delete
+                4.display
+                */}{" "}
         <div className="grid">
-          <TaskList tasks={tasks} activeId={Number(taskId)} />
+          <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
           )}
-
           {/*  ===========================   ROUTING TABLE BELOW  ============================= */}
-
           <Switch>
-            {/* -------------new task form ----------------------- */}
+            {" "}
+            {/* -------------new task form ----------------------- */}{" "}
             <PropsRoute
               path="/tasks/new"
               component={TaskForm}
               onSubmit={this.addTask}
               // addTask callback function is passed to TaskForm as a callback function prop
             />
-
-            {/* -------------edit task route ----------------------- */}
+            {/* -------------edit task route ----------------------- */}{" "}
             <Switch>
               <PropsRoute
                 path="/tasks/new"
                 component={TaskForm}
                 onSubmit={this.addTask}
-              />
+              />{" "}
               <PropsRoute
                 exact
                 path="/tasks/:id/edit"
@@ -160,20 +164,18 @@ class Editor extends React.Component {
                 task={task}
                 onSubmit={this.updateTask}
               />
-
-              {/* -------------Delete task callback route ------------- */}
+              {/* -------------Delete task callback route ------------- */}{" "}
               <PropsRoute
                 path="/tasks/:id"
                 component={Task}
                 task={task}
                 onDelete={this.deleteTask}
-              />
+              />{" "}
             </Switch>
-
-            {/* -------------display task ----------------------- */}
-            <PropsRoute path="/tasks/:id" component={Task} task={task} />
-          </Switch>
-        </div>
+            {/* -------------display task ----------------------- */}{" "}
+            <PropsRoute path="/tasks/:id" component={Task} task={task} />{" "}
+          </Switch>{" "}
+        </div>{" "}
       </div>
     );
   }
