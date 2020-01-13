@@ -34,6 +34,7 @@ class Api::TasksController < ApplicationController
       :body,
       :deadline,
       :completed,
+      :tags,
       :tag_list,
     )
   end

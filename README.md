@@ -297,7 +297,6 @@ Sun Jan 12 16:59:56 +08 2020
 ]
 ```
 
-1. hmm can't generate the nested attribute though :( probably have to look into something like this:
 
 # README
 

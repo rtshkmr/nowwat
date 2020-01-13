@@ -7,6 +7,6 @@ class Api::TagsController < ApplicationController
   end
 
   def show
-    respond_with Tag.find(params[:id]), include: :tasks
+    respond_with Tag.find(params[:id]), include: :task
     end
 end
