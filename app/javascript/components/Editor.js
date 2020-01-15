@@ -17,7 +17,7 @@ class Editor extends React.Component {
     super(props);
     this.state = {
       tasks: null,
-      all_tags: [],
+      all_tags: []
     };
 
     //   bind class methods: ADD/DELETE/UPDATE
@@ -45,21 +45,25 @@ class Editor extends React.Component {
       .catch(error => {
         console.log(error);
       });
-    console.log("from within the get axios call for all tasks: ", this.state.tasks);
+    console.log(
+      "from within the get axios call for all tasks: ",
+      this.state.tasks
+    );
     console.log(
       "API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
     );
     console.log("this.state.tasks:", this.state.tasks);
 
-
-
     // -------------------- fetching all_tags and putting to state : ------------------------------
-    axios.get("/api/tags.json")
+    axios
+      .get("/api/tags.json")
       .then(response => {
         this.setState({ all_tags: response.data });
-        console.log("axios response for get /api/tags.json", response.data)
-    })
-
+        console.log("axios response for get /api/tags.json", response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   // =========================  CREATE/NEW TASK METHOD ================================
@@ -130,14 +134,27 @@ class Editor extends React.Component {
   }
 
   render() {
+    /*
+    What is encapsulated: 
+    - tasks: API output for /tasks.json
+    - all_tags: API output for /tags.json
+    - match : holds the input params (browser's requested url params)
+    */
     const { tasks } = this.state;
+    const { all_tags } = this.state;
+    console.log("from within editor.js, const {tasks} = this.state", tasks);
+    console.log("from within editor.js, const {all_tags} = this.state",all_tags);
+
     //   null check just in case
     if (tasks === null) return null;
-
     const { match } = this.props;
+    console.log("props passed in const{match} = this.props", match);
+
+    // url info:
+    // need not necessarily be taskID, if all_tags, then it's tagID
     const taskId = match.params.id;
     const task = tasks.find(e => e.id === Number(taskId));
-    
+
     console.log("this.state.tasks from editor.js:" + this.state.tasks);
     console.log("now rendering the editor component");
 
@@ -145,17 +162,17 @@ class Editor extends React.Component {
       <div>
         <Header />{" "}
         {/* Keep routes in this order:
-                1. new
-                2. edit
-                3.delete
-                4.display
-                */}{" "}
+                                1. new
+                                2. edit
+                                3.delete
+                                4.display
+                                */}{" "}
         <div className="grid">
           <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
-          )}
-          {/*  ===========================   ROUTING TABLE BELOW  ============================= */}
+          )}{" "}
+          {/*  ===========================   ROUTING TABLE BELOW  ============================= */}{" "}
           <Switch>
             {" "}
             {/* -------------new task form ----------------------- */}{" "}
@@ -164,7 +181,7 @@ class Editor extends React.Component {
               component={TaskForm}
               onSubmit={this.addTask}
               // addTask callback function is passed to TaskForm as a callback function prop
-            />
+            />{" "}
             {/* -------------edit task route ----------------------- */}{" "}
             <Switch>
               <PropsRoute
@@ -178,7 +195,7 @@ class Editor extends React.Component {
                 component={TaskForm}
                 task={task}
                 onSubmit={this.updateTask}
-              />
+              />{" "}
               {/* -------------Delete task callback route ------------- */}{" "}
               <PropsRoute
                 path="/tasks/:id"
@@ -186,16 +203,18 @@ class Editor extends React.Component {
                 task={task}
                 onDelete={this.deleteTask}
               />{" "}
-            </Switch>
+            </Switch>{" "}
             {/* -------------display task ----------------------- */}{" "}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />{" "}
             {/* -------------display tag ----------------------- */}{" "}
-            {/* <PropsRoute path="/tags" component={TagList} tags={this.state.all_tags} />{" "} */}
+            {/* <PropsRoute path="/tags" component={TagList} tags={this.state.all_tags} />{" "} */}{" "}
           </Switch>{" "}
-
-          {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}
+          {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}{" "}
           <TagList tags={this.state.all_tags} />{" "}
-          {console.log("all_tags props passed into TagList component: ", this.state.all_tags)}
+          {console.log(
+            "all_tags props passed into TagList component: ",
+            this.state.all_tags
+          )}{" "}
         </div>{" "}
       </div>
     );
