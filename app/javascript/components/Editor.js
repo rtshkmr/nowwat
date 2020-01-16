@@ -143,7 +143,10 @@ class Editor extends React.Component {
     const { tasks } = this.state;
     const { all_tags } = this.state;
     console.log("from within editor.js, const {tasks} = this.state", tasks);
-    console.log("from within editor.js, const {all_tags} = this.state",all_tags);
+    console.log(
+      "from within editor.js, const {all_tags} = this.state",
+      all_tags
+    );
 
     //   null check just in case
     if (tasks === null) return null;
@@ -168,7 +171,10 @@ class Editor extends React.Component {
                                 4.display
                                 */}{" "}
         <div className="grid">
-          <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
+          <div >
+            <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
+            <TagList tags={this.state.all_tags} />{" "}
+          </div>
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
           )}{" "}
@@ -210,7 +216,6 @@ class Editor extends React.Component {
             {/* <PropsRoute path="/tags" component={TagList} tags={this.state.all_tags} />{" "} */}{" "}
           </Switch>{" "}
           {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}{" "}
-          <TagList tags={this.state.all_tags} />{" "}
           {console.log(
             "all_tags props passed into TagList component: ",
             this.state.all_tags

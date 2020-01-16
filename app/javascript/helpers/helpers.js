@@ -49,25 +49,24 @@ export const formatDate = d => {
 // }
 
 export function tag_list(task) {
-  // let result = "";
-  // task.tags.forEach(element => {
-  //   <div>
-  //     <Link to={`/tags/${element.id}`}> {element.name}</Link>
-  //   </div>;
+  let result = "";
+  task.tags.forEach(element => {
+    result += " #" + element.name;
+  });
+  return result;
+
+  // return task.tags.map(tag => {
+  //   <li key={tag.id}>
+  //     <Link to={`/tags/${tag.id}`} className="displayedTag">
+  //       {tag.name}
+  //     </Link>
+  //   </li>;
   // });
-  // return (
-  //   <div>
-  //     {/* <Link to={`/tags/${element.id}`}> { element.name }</Link> */}
+}
 
-  //     {/* {result} */}
-  //   </div>
-  // );
-
-  return task.tags.map(tag => {
-    <li key={tag.id}>
-      <Link to={`/tags/${tag.id}`} className="displayedTag">
-        {tag.name}
-      </Link>
-    </li>;
+export function task_list(tag) {
+  let result = "";
+  tag.tasks.forEach(element => {
+    result += " |" + element.title + " |";
   });
 }
