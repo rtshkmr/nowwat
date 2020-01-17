@@ -51,7 +51,7 @@ export const formatDate = d => {
 export function tag_list(task) {
   let result = "";
   task.tags.forEach(element => {
-    result += " #" + element.name;
+    result += "| #" + element.name + " |";
   });
   return result;
 

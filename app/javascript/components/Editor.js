@@ -11,13 +11,14 @@ import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 
 import TagList from "./TagList";
+import Tag from "./Tag";
 
 class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: null,
-      all_tags: []
+      tags: null,
     };
 
     //   bind class methods: ADD/DELETE/UPDATE
@@ -54,11 +55,11 @@ class Editor extends React.Component {
     );
     console.log("this.state.tasks:", this.state.tasks);
 
-    // -------------------- fetching all_tags and putting to state : ------------------------------
+    // -------------------- fetching tags and putting to state : ------------------------------
     axios
       .get("/api/tags.json")
       .then(response => {
-        this.setState({ all_tags: response.data });
+        this.setState({ tags: response.data });
         console.log("axios response for get /api/tags.json", response.data);
       })
       .catch(error => {
@@ -85,6 +86,8 @@ class Editor extends React.Component {
         console.log(error);
       });
   }
+
+  // =========================  CREATE/NEW TAG METHOD ================================
 
   // =========================  DELETE TASK METHOD ================================
 
@@ -137,28 +140,35 @@ class Editor extends React.Component {
     /*
     What is encapsulated: 
     - tasks: API output for /tasks.json
-    - all_tags: API output for /tags.json
+    - tags: API output for /tags.json
     - match : holds the input params (browser's requested url params)
     */
     const { tasks } = this.state;
-    const { all_tags } = this.state;
+    const { tags } = this.state;
     console.log("from within editor.js, const {tasks} = this.state", tasks);
     console.log(
-      "from within editor.js, const {all_tags} = this.state",
-      all_tags
+      "from within editor.js, const {tags} = this.state",
+      tags
     );
-
     //   null check just in case
     if (tasks === null) return null;
+    if (tags === null) return null;
     const { match } = this.props;
     console.log("props passed in const{match} = this.props", match);
 
     // url info:
-    // need not necessarily be taskID, if all_tags, then it's tagID
+    // need not necessarily be taskID, if tags, then it's tagID
     const taskId = match.params.id;
     const task = tasks.find(e => e.id === Number(taskId));
+    const tag = tags.find(e => e.id === Number(taskId));
 
-    console.log("this.state.tasks from editor.js:" + this.state.tasks);
+
+    console.log("this.state.tasks from editor.js:",this.state.tasks);
+    console.log("**** tasks:", tasks);
+    console.log("**** task:", task);
+    console.log("**** tags:", tags);
+    console.log("**** tag:", tag);
+
     console.log("now rendering the editor component");
 
     return (
@@ -171,9 +181,9 @@ class Editor extends React.Component {
                                 4.display
                                 */}{" "}
         <div className="grid">
-          <div >
+          <div>
             <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
-            <TagList tags={this.state.all_tags} />{" "}
+            <TagList tags={this.state.tags} />{" "}
           </div>
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
@@ -190,11 +200,12 @@ class Editor extends React.Component {
             />{" "}
             {/* -------------edit task route ----------------------- */}{" "}
             <Switch>
-              <PropsRoute
+              {/*  urm this needs tobe removed idk why it's here... */}
+              {/* <PropsRoute
                 path="/tasks/new"
                 component={TaskForm}
                 onSubmit={this.addTask}
-              />{" "}
+              />{" "} */}
               <PropsRoute
                 exact
                 path="/tasks/:id/edit"
@@ -213,12 +224,12 @@ class Editor extends React.Component {
             {/* -------------display task ----------------------- */}{" "}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />{" "}
             {/* -------------display tag ----------------------- */}{" "}
-            {/* <PropsRoute path="/tags" component={TagList} tags={this.state.all_tags} />{" "} */}{" "}
+            <PropsRoute path="/tags/:id" component={Tag} tags={tag} />{" "}{" "}
           </Switch>{" "}
           {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}{" "}
           {console.log(
-            "all_tags props passed into TagList component: ",
-            this.state.all_tags
+            "tags props passed into TagList component: ",
+            this.state.tags
           )}{" "}
         </div>{" "}
       </div>
