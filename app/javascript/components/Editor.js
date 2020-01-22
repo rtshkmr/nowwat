@@ -18,7 +18,7 @@ class Editor extends React.Component {
     super(props);
     this.state = {
       tasks: null,
-      tags: null,
+      tags: null
     };
 
     //   bind class methods: ADD/DELETE/UPDATE
@@ -138,18 +138,15 @@ class Editor extends React.Component {
 
   render() {
     /*
-    What is encapsulated: 
-    - tasks: API output for /tasks.json
-    - tags: API output for /tags.json
-    - match : holds the input params (browser's requested url params)
-    */
+        What is encapsulated: 
+        - tasks: API output for /tasks.json
+        - tags: API output for /tags.json
+        - match : holds the input params (browser's requested url params)
+        */
     const { tasks } = this.state;
     const { tags } = this.state;
     console.log("from within editor.js, const {tasks} = this.state", tasks);
-    console.log(
-      "from within editor.js, const {tags} = this.state",
-      tags
-    );
+    console.log("from within editor.js, const {tags} = this.state", tags);
     //   null check just in case
     if (tasks === null) return null;
     if (tags === null) return null;
@@ -162,8 +159,7 @@ class Editor extends React.Component {
     const task = tasks.find(e => e.id === Number(taskId));
     const tag = tags.find(e => e.id === Number(taskId));
 
-
-    console.log("this.state.tasks from editor.js:",this.state.tasks);
+    console.log("this.state.tasks from editor.js:", this.state.tasks);
     console.log("**** tasks:", tasks);
     console.log("**** task:", task);
     console.log("**** tags:", tags);
@@ -175,16 +171,16 @@ class Editor extends React.Component {
       <div>
         <Header />{" "}
         {/* Keep routes in this order:
-                                1. new
-                                2. edit
-                                3.delete
-                                4.display
-                                */}{" "}
+                                                1. new
+                                                2. edit
+                                                3.delete
+                                                4.display
+                                                */}{" "}
         <div className="grid">
           <div>
             <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
             <TagList tags={this.state.tags} />{" "}
-          </div>
+          </div>{" "}
           {console.log(
             "TaskList component should be rendered with the tasks passed in"
           )}{" "}
@@ -200,12 +196,13 @@ class Editor extends React.Component {
             />{" "}
             {/* -------------edit task route ----------------------- */}{" "}
             <Switch>
-              {/*  urm this needs tobe removed idk why it's here... */}
+              {" "}
+              {/*  urm this needs tobe removed idk why it's here... */}{" "}
               {/* <PropsRoute
-                path="/tasks/new"
-                component={TaskForm}
-                onSubmit={this.addTask}
-              />{" "} */}
+                                path="/tasks/new"
+                                component={TaskForm}
+                                onSubmit={this.addTask}
+                              />{" "} */}{" "}
               <PropsRoute
                 exact
                 path="/tasks/:id/edit"
@@ -224,7 +221,7 @@ class Editor extends React.Component {
             {/* -------------display task ----------------------- */}{" "}
             <PropsRoute path="/tasks/:id" component={Task} task={task} />{" "}
             {/* -------------display tag ----------------------- */}{" "}
-            <PropsRoute path="/tags/:id" component={Tag} tags={tag} />{" "}{" "}
+            <PropsRoute path="/tags/:id" component={Tag} tag={tag} />{" "}
           </Switch>{" "}
           {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}{" "}
           {console.log(

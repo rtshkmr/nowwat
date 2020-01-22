@@ -39,14 +39,13 @@ class TagList extends React.Component {
       .filter(el => this.matchSearchTerm(el))
       .sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
 
-
     return filteredTags.map(tag => (
       <li key={tag.id}>
         <Link
           to={`/tags/${tag.id}`}
           className={activeId === tag.id ? "active" : ""}
         >
-          {tag.name}
+          {tag.name}{" "}
         </Link>{" "}
       </li>
     ));
@@ -58,10 +57,8 @@ class TagList extends React.Component {
 
     return (
       <section className="TagList">
-        <h2>
-          All Tags 
-        </h2>
-        {/*-------------------- Search Input ------------------ */}
+        <h2>All Tags </h2>{" "}
+        {/*-------------------- Search Input ------------------ */}{" "}
         <input
           className="search"
           placeholder="Search Tags"
@@ -69,7 +66,7 @@ class TagList extends React.Component {
           // ref to reference it within the same component:
           ref={this.searchInput}
           onKeyUp={this.updateSearchTerm}
-        />
+        />{" "}
         <ul> {this.renderTags()} </ul>{" "}
       </section>
     );
