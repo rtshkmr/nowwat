@@ -151,13 +151,14 @@ class Editor extends React.Component {
     if (tasks === null) return null;
     if (tags === null) return null;
     const { match } = this.props;
-    console.log("[Editor.js] |render method| props held in const {match} = this.props", match);
+    console.log("[Editor.js] |render method| URL props held in const {match} = this.props", match);
 
     // url info:
     // need not necessarily be taskID, if tags, then it's tagID
+    console.log("[Editor.js] : URL params in match.params.id", match.params);
     const taskId = match.params.id;
     const task = tasks.find(e => e.id === Number(taskId));
-    const tag = tags.find(e => e.id === Number(7)); // #debug 
+    const tag = tags.find(e => e.id === Number(taskId)); // #debug 
 
     console.log("[Editor.js] |render method| this.state.tasks from editor.js:", this.state.tasks);
     console.log("**** tasks:", tasks);

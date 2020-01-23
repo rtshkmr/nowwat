@@ -17,7 +17,7 @@ const Tag = ({ tag }) => (
   //   </ul>{" "}
   // </div>
   <div>
-  {console.log("props received by Tag.js: ", tag)}
+  {console.log("[Tag.js]: Props Received:", tag)}
     YAY WE REACHED THE TAG COMPONENT.
   </div>
 );
