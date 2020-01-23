@@ -62,7 +62,7 @@ class Tag extends React.Component {
       "[Tag.js]: this is what is in this.state.tags:",
       this.state.tags
     );
-    return <div>testing tag.js now just need to figure out how to extract out the correct tasks...</div>;
+    return <div>testing tag.js now just need to figure out how to extract out the correct tasks that's aldy in state...</div>;
   }
 }
 
