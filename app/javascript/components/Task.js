@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom"; // to pass existing props to task form when editing
-import {tag_list} from "./../helpers/helpers"
+import { tag_list } from "./../helpers/helpers";
 
 const Task = ({ task, onDelete }) => (
   <div className="taskContainer">
-    {console.log("props received by Task.js: ", task)}
+    {" "}
+    {console.log("[Task.js]: Props Received:", task)}{" "}
     <h2>
       {" "}
       {task.deadline} {" - "} {task.title}{" "}
@@ -31,7 +32,7 @@ const Task = ({ task, onDelete }) => (
       <li>
         <strong> Complete ? </strong> {task.completed ? " yes" : " no"}{" "}
       </li>{" "}
-      <li className="tag_list">{tag_list(task)}</li>
+      <li className="tag_list"> {tag_list(task)} </li>{" "}
     </ul>{" "}
   </div>
 );

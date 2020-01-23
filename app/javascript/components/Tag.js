@@ -5,16 +5,20 @@ import { tag_list } from "./../helpers/helpers";
 import { task_list } from "./../helpers/helpers";
 
 const Tag = ({ tag }) => (
-  <div className="taskContainer">
-    {   console.log("*** props received by Tag.js:", tag)}
-    {" "}
-    {console.log("props received by Tag.js: ", tag)} <h2> {tag.name}</h2>{" "}
-    <ul>
-      <li>
-        <strong> Associated Tasks: </strong>{" "}
-      </li>{" "}
-      <li className="task_list"> {task_list(tag)} </li>{" "}
-    </ul>{" "}
+  // <div className="taskContainer">
+  //   {   console.log("*** props received by Tag.js:", tag)}
+  //   {" "}
+  //   {console.log("props received by Tag.js: ", tag)} <h2> {tag.name}</h2>{" "}
+  //   <ul>
+  //     <li>
+  //       <strong> Associated Tasks: </strong>{" "}
+  //     </li>{" "}
+  //     {/* <li className="task_list"> {task_list(tag)} </li>{" "} */}
+  //   </ul>{" "}
+  // </div>
+  <div>
+  {console.log("props received by Tag.js: ", tag)}
+    YAY WE REACHED THE TAG COMPONENT.
   </div>
 );
 

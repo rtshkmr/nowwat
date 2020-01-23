@@ -47,15 +47,15 @@ class TaskList extends React.Component {
           to={`/tasks/${task.id}`}
           className={activeId === task.id ? "active" : ""}
         >
-          {task.deadline} {" - "} {task.title}{" "}
+          {task.deadline} {":"} {task.title}{" "}
         </Link>{" "}
       </li>
     ));
   }
 
   render() {
-    console.log("the TaskList component is now rendering...");
-    console.log("from the TaskList Props: " + this.props.tasks.tags);
+    console.log("[TaskList.js]: the TaskList component is now rendering...");
+    console.log("[TaskList.js]: Props received: ", this.props.tasks);
 
     return (
       <section className="taskList">

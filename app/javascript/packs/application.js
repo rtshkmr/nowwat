@@ -19,13 +19,13 @@ import App from "../components/App";
 document.addEventListener("DOMContentLoaded", () => {
   render(
     <BrowserRouter>
-      {console.log("target: the div with the class name root")}
-      <App />
+      {" "}
+      {console.log("[Application.js]: target: the div with the class name root in the index.html.erb view")} <App />{" "}
       {console.log(
-        "application.js has had App.js component rendered via the < BrowserRouter > component"
-      )}
-      {console.log("the App.js component should be rendered by now")}
-      {/* {console.log("attempting to render app.js component via a BrowserRouter component"      )} */}
+        "[Application.js]: application.js has had App.js component rendered via the < BrowserRouter > component"
+      )}{" "}
+      {/* {console.log("the App.js component should be rendered by now")} */}{" "}
+      {/* {console.log("attempting to render app.js component via a BrowserRouter component"      )} */}{" "}
     </BrowserRouter>,
     document.querySelector("#root")
   );

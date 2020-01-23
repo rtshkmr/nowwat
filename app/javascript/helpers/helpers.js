@@ -54,14 +54,6 @@ export function tag_list(task) {
     result += "| #" + element.name + " |";
   });
   return result;
-
-  // return task.tags.map(tag => {
-  //   <li key={tag.id}>
-  //     <Link to={`/tags/${tag.id}`} className="displayedTag">
-  //       {tag.name}
-  //     </Link>
-  //   </li>;
-  // });
 }
 
 export function task_list(tag) {

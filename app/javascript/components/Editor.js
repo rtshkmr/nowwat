@@ -26,41 +26,41 @@ class Editor extends React.Component {
     this.deleteTask = this.deleteTask.bind(this);
     this.updateTask = this.updateTask.bind(this);
 
-    console.log("editor component has been contructed");
+    console.log("[Editor.js]: |constructor method| editor component has been contructed");
   }
 
   // =========================  API FETCHING UPON MOUNT ================================
 
   componentDidMount() {
     console.log(
-      "componentDidMount hook is now running after the editor component has been mounted..."
+      "[Editor.js] |componentDidMount Hook|componentDidMount hook is now running after the editor component has been mounted..."
     );
     // ----------------- adding the tasks to state by making API call ------------------------------
     axios
       .get("/api/tasks.json")
       .then(response => {
         this.setState({ tasks: response.data });
-        console.log("axios response for get /api/tasks.json: ", response.data);
-        console.log("current state in Editor.js: ", this.state);
+        console.log("[Editor.js] |componentDidMount Hook| axios response for get /api/tasks.json: ", response.data);
+        console.log("[Editor.js] |componentDidMount Hook| current state in Editor.js: ", this.state);
       })
       .catch(error => {
         console.log(error);
       });
     console.log(
-      "from within the get axios call for all tasks: ",
+      "[Editor.js] |axios API Fetching| call for all tasks: ",
       this.state.tasks
     );
     console.log(
-      "API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
+      "[Editor.js] |axios API Fetching| API for all tasks has been pulled by Editor.js upon the Editor component being mounted"
     );
-    console.log("this.state.tasks:", this.state.tasks);
+    console.log("[Editor.js]:this.state.tasks:", this.state.tasks);
 
     // -------------------- fetching tags and putting to state : ------------------------------
     axios
       .get("/api/tags.json")
       .then(response => {
         this.setState({ tags: response.data });
-        console.log("axios response for get /api/tags.json", response.data);
+        // console.log("axios response for get /api/tags.json", response.data);
       })
       .catch(error => {
         console.log(error);
@@ -138,51 +138,52 @@ class Editor extends React.Component {
 
   render() {
     /*
-        What is encapsulated: 
-        - tasks: API output for /tasks.json
-        - tags: API output for /tags.json
-        - match : holds the input params (browser's requested url params)
-        */
+            What is encapsulated: 
+            - tasks: API output for /tasks.json
+            - tags: API output for /tags.json
+            - match : holds the input params (browser's requested url params)
+            */
     const { tasks } = this.state;
     const { tags } = this.state;
-    console.log("from within editor.js, const {tasks} = this.state", tasks);
-    console.log("from within editor.js, const {tags} = this.state", tags);
+    console.log("[Editor.js] |render method| from within editor.js, const {tasks} holds:", tasks);
+    console.log("[Editor.js] |render method| from within editor.js, const {tags} holds:", tags);
     //   null check just in case
     if (tasks === null) return null;
     if (tags === null) return null;
     const { match } = this.props;
-    console.log("props passed in const{match} = this.props", match);
+    console.log("[Editor.js] |render method| props held in const {match} = this.props", match);
 
     // url info:
     // need not necessarily be taskID, if tags, then it's tagID
     const taskId = match.params.id;
     const task = tasks.find(e => e.id === Number(taskId));
-    const tag = tags.find(e => e.id === Number(taskId));
+    const tag = tags.find(e => e.id === Number(7)); // #debug 
 
-    console.log("this.state.tasks from editor.js:", this.state.tasks);
+    console.log("[Editor.js] |render method| this.state.tasks from editor.js:", this.state.tasks);
     console.log("**** tasks:", tasks);
     console.log("**** task:", task);
     console.log("**** tags:", tags);
     console.log("**** tag:", tag);
 
-    console.log("now rendering the editor component");
+    console.log("[Editor.js]: now rendering the editor component");
 
     return (
       <div>
         <Header />{" "}
         {/* Keep routes in this order:
-                                                1. new
-                                                2. edit
-                                                3.delete
-                                                4.display
-                                                */}{" "}
+                                                                1. new
+                                                                2. edit
+                                                                3.delete
+                                                                4.display
+                                                                */}{" "}
         <div className="grid">
           <div>
+            {/* this calls the TaskList and TagList components */}
             <TaskList tasks={tasks} activeId={Number(taskId)} />{" "}
             <TagList tags={this.state.tags} />{" "}
           </div>{" "}
           {console.log(
-            "TaskList component should be rendered with the tasks passed in"
+            "[Editor.js]: TaskList component should be rendered with the tasks passed in"
           )}{" "}
           {/*  ===========================   ROUTING TABLE BELOW  ============================= */}{" "}
           <Switch>
@@ -199,10 +200,10 @@ class Editor extends React.Component {
               {" "}
               {/*  urm this needs tobe removed idk why it's here... */}{" "}
               {/* <PropsRoute
-                                path="/tasks/new"
-                                component={TaskForm}
-                                onSubmit={this.addTask}
-                              />{" "} */}{" "}
+                                                path="/tasks/new"
+                                                component={TaskForm}
+                                                onSubmit={this.addTask}
+                                              />{" "} */}{" "}
               <PropsRoute
                 exact
                 path="/tasks/:id/edit"
@@ -225,7 +226,7 @@ class Editor extends React.Component {
           </Switch>{" "}
           {/* SIMULTANEOUSLY DISPLAY TAGSLIST */}{" "}
           {console.log(
-            "tags props passed into TagList component: ",
+            "[Editor.js]: props passed into TagList.js component: ",
             this.state.tags
           )}{" "}
         </div>{" "}

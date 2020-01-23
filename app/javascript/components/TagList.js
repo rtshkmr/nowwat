@@ -52,8 +52,8 @@ class TagList extends React.Component {
   }
 
   render() {
-    console.log("the TagList component is now rendering...");
-    console.log("from the TagList Props: " + this.props.tags);
+    console.log("[TagList.js]: the TagList component is now rendering...");
+    console.log("[TagList.js]: Props received: ", this.props.tags);
 
     return (
       <section className="TagList">
