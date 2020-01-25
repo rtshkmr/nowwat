@@ -64,3 +64,9 @@ export function task_list(tag) {
   });
   return result;
 }
+
+
+export function text_to_comma_separated_array(inputText) {
+  let res = inputText.split(",");
+  return res;
+}

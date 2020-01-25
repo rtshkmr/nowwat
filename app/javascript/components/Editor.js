@@ -126,7 +126,6 @@ class Editor extends React.Component {
   }
 
   // =========================  UPDATE/EDIT TASK METHOD ================================
-
   updateTask(updatedTask) {
     axios
       .put(`/api/tasks/${updatedTask.id}.json`, updatedTask)
@@ -192,11 +191,11 @@ class Editor extends React.Component {
       <div>
         <Header />{" "}
         {/* Keep routes in this order:
-                                                                                1. new
-                                                                                2. edit
-                                                                                3.delete
-                                                                                4.display
-                                                                                */}{" "}
+                  1. new
+                  2. edit
+                  3.delete
+                  4.display
+                  */}{" "}
         <div className="grid">
           <div>
             {" "}

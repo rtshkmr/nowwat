@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // import helper functions:
-import { isEmptyObject, validateTask, formatDate } from "./../helpers/helpers";
+import { isEmptyObject, validateTask, formatDate, text_to_comma_separated_array } from "./../helpers/helpers";
 
 // Pickaday datepicker
 import Pikaday from "pikaday";
@@ -13,7 +13,6 @@ import "pikaday/css/pikaday.css";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
 
 class TaskForm extends React.Component {
   constructor(props) {
@@ -58,29 +57,46 @@ class TaskForm extends React.Component {
       const { onSubmit } = this.props;
       onSubmit(task);
       console.log(
-        " form has been been submitted, this was the object passed: ${ task }"
+        " [TaskForm.js]: | handleSubmit function | form has been been submitted, this was the object passed:",
+        task
       );
     }
   }
 
   updateTask(key, value) {
+    if (key === "tags") {
+      value = (text_to_comma_separated_array(value)); 
+    }
+
     this.setState(prevState => ({
       task: {
         ...prevState.task,
         [key]: value
       }
     }));
+    console.log(
+      "[TaskForm.js]: |updateTask method| task updated to: ",
+      this.state
+    );
   }
 
   handleInputChange(task) {
     const { target } = task;
     const { name } = target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    //  trying to push input into array
+    // if (name === "tags") {
+    //   value += text_to_comma_separated_array(value);
+    // }
     this.updateTask(name, value);
+    console.log(
+      "[TaskForm.js]: |handleInputChange method| task updated to: ",
+      this.state
+    );
   }
 
   renderErrors() {
-    console.log("rendering errors in form submission...");
+    console.log("[TaskForm.js]: rendering errors in form submission...");
     const { errors } = this.state;
 
     if (isEmptyObject(errors)) {
@@ -147,7 +163,7 @@ class TaskForm extends React.Component {
                 type="text"
                 id="deadline"
                 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                // CREATING A REP ON THE INPUT SO WE CAN REFERENCE IT ELSEWHERE IN THE CODE
+                // CREATING A REF ON THE INPUT SO WE CAN REFERENCE IT ELSEWHERE IN THE CODE
                 ref={this.dateInput}
                 autoComplete="off"
                 value={task.deadline}
@@ -155,6 +171,19 @@ class TaskForm extends React.Component {
               />{" "}
             </label>{" "}
           </div>{" "}
+          {/*===================== TAG FIELD =========================*/}
+          <div>
+            <label htmlFor="tags">
+              <strong> Tags: </strong>{" "}
+              <input
+                type="text"
+                id="tags"
+                name="tags"
+                onChange={this.handleInputChange}
+                value={task.tags}
+              />{" "}
+            </label>
+          </div>
           {/* ============= COMPLETED STATUS============== */}{" "}
           <div>
             <label htmlFor="completed">
@@ -190,7 +219,8 @@ TaskForm.defaultProps = {
     title: "",
     body: "",
     deadline: "",
-    completed: false
+    completed: false,
+    tags: []
   }
 };
 
