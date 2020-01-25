@@ -14,7 +14,6 @@ class Tag extends React.Component {
     };
 
     // bind class methods here:
-
     console.log(
       "[Tag.js]: |constructor method| Tag component has been constructred"
     );

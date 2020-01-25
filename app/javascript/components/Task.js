@@ -33,6 +33,15 @@ const Task = ({ task, onDelete }) => (
         <strong> Complete ? </strong> {task.completed ? " yes" : " no"}{" "}
       </li>{" "}
       <li className="tag_list"> {tag_list(task)} </li>{" "}
+      {/* <li className="tag_list">
+        {(() => {
+          if (task.tags.length > 0) {
+            tag_list(task);
+            console.log("[Task.js]: within weird if block, length:", task.tags.length)
+            console.log("[Task.js]: within weird if block", tag_list(task));
+          }
+        })()}
+      </li>{" "} */}
     </ul>{" "}
   </div>
 );
