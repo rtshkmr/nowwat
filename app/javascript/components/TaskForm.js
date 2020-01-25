@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // import helper functions:
-import { isEmptyObject, validateTask, formatDate, text_to_comma_separated_array } from "./../helpers/helpers";
+import {
+  isEmptyObject,
+  validateTask,
+  formatDate,
+  text_to_comma_separated_array
+} from "./../helpers/helpers";
 
 // Pickaday datepicker
 import Pikaday from "pikaday";
@@ -64,8 +69,9 @@ class TaskForm extends React.Component {
   }
 
   updateTask(key, value) {
+    // convert value for the key tags to a string array:
     if (key === "tags") {
-      value = (text_to_comma_separated_array(value)); 
+      value = text_to_comma_separated_array(value);
     }
 
     this.setState(prevState => ({
