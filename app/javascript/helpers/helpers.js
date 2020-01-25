@@ -58,7 +58,9 @@ export function tag_list(task) {
 
 export function task_list(tag) {
   let result = "";
+  console.log("[helpers.js]: |task_list method|: tag.tasks: ", tag.tasks[0].title);
   tag.tasks.forEach(element => {
     result += " |" + element.title + " |";
   });
+  return result;
 }

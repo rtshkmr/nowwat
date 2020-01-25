@@ -154,11 +154,11 @@ class Editor extends React.Component {
     const { tasks } = this.state;
     const { tags } = this.state;
     console.log(
-      "[Editor.js] |render method| from within editor.js, const {tasks} holds:",
+      "[Editor.js] |render method| from within editor.js, const {tasks} holds as an array:",
       tasks
     );
     console.log(
-      "[Editor.js] |render method| from within editor.js, const {tags} holds:",
+      "[Editor.js] |render method| from within editor.js, const {tags} holds as an array:",
       tags
     );
     //   null check just in case
@@ -166,7 +166,7 @@ class Editor extends React.Component {
     if (tags === null) return null;
     const { match } = this.props;
     console.log(
-      "[Editor.js] |render method| URL props held in const {match} = this.props",
+      "[Editor.js] |render method| URL props held as an array in const {match} = this.props",
       match
     );
 

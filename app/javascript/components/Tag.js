@@ -62,13 +62,26 @@ class Tag extends React.Component {
       "[Tag.js]: this is what is in this.state.tags:",
       this.state.tags
     );
-    return <div>testing tag.js now just need to figure out how to extract out the correct tasks that's aldy in state...</div>;
+
+    // do a nullcheck to avoid error:
+    if (tags === null) return null;
+    // i'm trying to extract out the correct tag here:
+    const correctTagObject = tags.find(e => e.id === Number(tagId));
+    console.log("[Tag.js]: extracted tag object: ", correctTagObject);
+
+    // return <div>testing tag.js now just need to figure out how to extract out the correct tasks that's aldy in state...</div>;
+    return (
+      <div>
+        <h1> Tasks Associated With This Tag: </h1>
+        <li className="task_list">{task_list(correctTagObject)}</li>
+      </div>
+    );
   }
 }
 
 Tag.propTypes = {
   tag: PropTypes.shape()
-  // history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+  // history: PropTypes.shape({ push: PropTypes.func }).isRequired
 };
 
 Tag.defaultProps = {
