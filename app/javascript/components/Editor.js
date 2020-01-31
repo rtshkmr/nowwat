@@ -13,6 +13,16 @@ import TaskForm from "./TaskForm";
 import TagList from "./TagList";
 import Tag from "./Tag";
 
+
+// import helper functions:
+import {
+  isEmptyObject,
+  validateTask,
+  formatDate,
+  text_to_comma_separated_array,
+  create_tag_object
+} from "../helpers/helpers";
+
 class Editor extends React.Component {
   constructor(props) {
     super(props);
@@ -78,6 +88,13 @@ class Editor extends React.Component {
   // =========================  CREATE/NEW TASK METHOD ================================
 
   addTask(newTask) {
+    console.log("[Editor.js]: creating new task... axioss method invoked");
+    console.log("[Editor.js]: this is the wrong task object: ", newTask);
+
+    const myStringArr = newTask.tags;
+    const myObjectArr = myStringArr.map(create_tag_object);
+    console.log("[Editor.js]: this is the ready task object: ", newTask);
+    newTask.tags = myObjectArr;
     axios
       .post("/api/tasks.json", newTask)
       .then(response => {
@@ -145,11 +162,11 @@ class Editor extends React.Component {
 
   render() {
     /*
-                What is encapsulated: 
-                - tasks: API output for /tasks.json
-                - tags: API output for /tags.json
-                - match : holds the input params (browser's requested url params)
-                */
+                    What is encapsulated: 
+                    - tasks: API output for /tasks.json
+                    - tags: API output for /tags.json
+                    - match : holds the input params (browser's requested url params)
+                    */
     const { tasks } = this.state;
     const { tags } = this.state;
     console.log(
@@ -191,11 +208,11 @@ class Editor extends React.Component {
       <div>
         <Header />{" "}
         {/* Keep routes in this order:
-                  1. new
-                  2. edit
-                  3.delete
-                  4.display
-                  */}{" "}
+                                  1. new
+                                  2. edit
+                                  3.delete
+                                  4.display
+                                  */}{" "}
         <div className="grid">
           <div>
             {" "}
@@ -221,10 +238,10 @@ class Editor extends React.Component {
               {" "}
               {/*  urm this needs tobe removed idk why it's here... */}{" "}
               {/* <PropsRoute
-                                                                path="/tasks/new"
-                                                                component={TaskForm}
-                                                                onSubmit={this.addTask}
-                                                              />{" "} */}{" "}
+                                                                                path="/tasks/new"
+                                                                                component={TaskForm}
+                                                                                onSubmit={this.addTask}
+                                                                              />{" "} */}{" "}
               <PropsRoute
                 exact
                 path="/tasks/:id/edit"

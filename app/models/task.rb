@@ -6,6 +6,8 @@ class Task < ApplicationRecord
   has_many :tags, through: :taggings, dependent: :destroy
 
   accepts_nested_attributes_for :tags
+  accepts_nested_attributes_for :taggings, allow_destroy: true 
+
 
   # the tag_list model: getter
   def tag_list

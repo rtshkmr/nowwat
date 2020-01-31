@@ -7,17 +7,13 @@ import {
   isEmptyObject,
   validateTask,
   formatDate,
-  text_to_comma_separated_array
+  text_to_comma_separated_array,
+  create_tag_object
 } from "./../helpers/helpers";
 
 // Pickaday datepicker
 import Pikaday from "pikaday";
 import "pikaday/css/pikaday.css";
-
-// import widget react date picker
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 class TaskForm extends React.Component {
   constructor(props) {
@@ -90,10 +86,6 @@ class TaskForm extends React.Component {
     const { target } = task;
     const { name } = target;
     let value = target.type === "checkbox" ? target.checked : target.value;
-    //  trying to push input into array
-    // if (name === "tags") {
-    //   value += text_to_comma_separated_array(value);
-    // }
     this.updateTask(name, value);
     console.log(
       "[TaskForm.js]: |handleInputChange method| task updated to: ",
@@ -130,8 +122,7 @@ class TaskForm extends React.Component {
 
     return (
       <div>
-        <h2> {title} </h2>
-        {this.renderErrors()}{" "}
+        <h2> {title} </h2> {this.renderErrors()}{" "}
         <form className="taskForm" onSubmit={this.handleSubmit}>
           {" "}
           {/* ============  TITLE  ======================= */}{" "}
@@ -177,7 +168,7 @@ class TaskForm extends React.Component {
               />{" "}
             </label>{" "}
           </div>{" "}
-          {/*===================== TAG FIELD =========================*/}
+          {/*===================== TAG FIELD =========================*/}{" "}
           <div>
             <label htmlFor="tags">
               <strong> Tags: </strong>{" "}
@@ -188,8 +179,8 @@ class TaskForm extends React.Component {
                 onChange={this.handleInputChange}
                 value={task.tags}
               />{" "}
-            </label>
-          </div>
+            </label>{" "}
+          </div>{" "}
           {/* ============= COMPLETED STATUS============== */}{" "}
           <div>
             <label htmlFor="completed">
@@ -206,7 +197,7 @@ class TaskForm extends React.Component {
           {/* ============= FORM ACTIONS ============== */}{" "}
           <div className="form-actions">
             <button type="submit"> Save Task </button>{" "}
-            <Link to={cancelURL}>Cancel</Link>
+            <Link to={cancelURL}> Cancel </Link>{" "}
           </div>{" "}
         </form>{" "}
       </div>

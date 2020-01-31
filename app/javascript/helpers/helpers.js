@@ -20,6 +20,7 @@ export const validateTask = task => {
     errors.deadline = "You must enter a valid date for deadline";
   }
   console.log(task);
+  console.log("[Helpers.js]: |validateTask function| errors:",errors)
   return errors;
 };
 
@@ -58,15 +59,26 @@ export function tag_list(task) {
 
 export function task_list(tag) {
   let result = "";
-  console.log("[helpers.js]: |task_list method|: tag.tasks: ", tag.tasks[0].title);
+  console.log(
+    "[helpers.js]: |task_list method|: tag.tasks: ",
+    tag.tasks[0].title
+  );
   tag.tasks.forEach(element => {
     result += " |" + element.title + " |";
   });
   return result;
 }
 
-
+// aim: input is text. Comma separate it and create an array of objects
 export function text_to_comma_separated_array(inputText) {
-  let res = inputText.split(",");
-  return res;
+  let stringArr = inputText.split(",");
+  // return stringArr.map(tag => create_tag_object(tag));
+  return stringArr;
+}
+
+// creates the right object
+export function create_tag_object(string) {
+  return {
+    name: string
+  };
 }
